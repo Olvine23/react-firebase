@@ -1,7 +1,7 @@
 import Form from "./components/common/Form";
 import "./App.css";
 import { Route, BrowserRouter as Router, Routes, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import app from "./firebaseConfig";
 import {
   getAuth,
@@ -13,6 +13,13 @@ import HomePage from "./components/HomePage";
 function App() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  useEffect(() => {
+    let authToken = sessionStorage.getItem('Auth Token')
+
+    if (authToken) {
+      navigate('/home')
+    }
+  }, [])
   let navigate = useNavigate()
   const handleAction = (id) => {
     console.log(id);
